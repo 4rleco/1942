@@ -4,8 +4,8 @@
 
 void DrawMenu(Screen& screen, bool& closeGame)
 {
-	DrawText("1942", GetScreenWidth() / 2 - 50, GetScreenHeight() - 600, 100, WHITE);
-	DrawText("Use the left button of the mosue to chosse an option", GetScreenWidth() - 750, GetScreenHeight() / 2 - 100, 20, WHITE);
+	DrawText("1942", GetScreenWidth() / 2 - 50, GetScreenHeight() - 600, 100, BLACK);
+	DrawText("Use the left button of the mosue to chosse an option", GetScreenWidth() - 750, GetScreenHeight() / 2 - 100, 20, BLACK);
 	DrawText("Play", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2, 30, RED);
 	DrawText("Options", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2 + 30, 30, RED);
 	DrawText("Credits", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2 + 60, 30, RED);

@@ -1,7 +1,5 @@
 #include "Ammo.h"
 
-#include "raylib.h"
-
 void InitAmmo(Ammo& ammo, Player player)
 {
 	for (int i = 0; i < MAX_AMMO; i++)
@@ -12,13 +10,14 @@ void InitAmmo(Ammo& ammo, Player player)
 	ammo.speed = 100.0f;
 }
 
-void DrawBullet(Ammo ammo)
+void DrawBullet(Ammo ammo, Texture2D& playerBullet)
 {
 	for (int i = 0; i < MAX_AMMO; i++)
 	{
 		if (ammo.bullet[i].shooted)
 		{
-			DrawCircle(static_cast<int>(ammo.bullet[i].posX), static_cast<int>(ammo.bullet[i].posY), ammo.bullet[i].radius, GREEN);
+			//DrawCircle(static_cast<int>(ammo.bullet[i].posX), static_cast<int>(ammo.bullet[i].posY), ammo.bullet[i].radius, GREEN);
+			DrawTexture(playerBullet, static_cast<int>(ammo.bullet[i].posX), static_cast<int>(ammo.bullet[i].posY), WHITE);
 		}
 	}
 }

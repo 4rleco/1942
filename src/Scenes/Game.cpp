@@ -7,6 +7,15 @@ using namespace std;
 namespace game
 {
 
+	void DrawBackground(Texture2D& background, float& scrollingBack)
+	{
+		DrawTextureEx(background, Vector2{ 20, +scrollingBack }, 0.0f, 2.0f, WHITE);
+		DrawTextureEx(background, Vector2{ 20, background.height * 2 + scrollingBack, }, 0.0f, 2.0f, WHITE);
+
+		background.height = GetScreenHeight();
+		background.width = GetScreenWidth();
+	}
+
 	void Drawgame(Player player, Enemy enemy)
 	{
 		DrawRectangle(static_cast<int>(player.posX), static_cast<int>(player.posY), player.width, player.height, YELLOW);
@@ -14,11 +23,11 @@ namespace game
 		DrawRectangle(static_cast<int>(enemy.posX), static_cast<int>(enemy.posY), enemy.width, enemy.height, RED);
 	}
 
-	void PlayerMovement(Player& player, Texture2D& playerTexture)
+	void PlayerMovement(Player& player)
 	{
 		if (IsKeyDown(KeyboardKey::KEY_UP))
 		{
-			player.posY -= player.speed * GetFrameTime();			
+			player.posY -= player.speed * GetFrameTime();
 		}
 
 		if (IsKeyDown(KeyboardKey::KEY_DOWN))
@@ -28,15 +37,13 @@ namespace game
 
 		if (IsKeyDown(KeyboardKey::KEY_RIGHT))
 		{
-			player.posX += player.speed * GetFrameTime();			
+			player.posX += player.speed * GetFrameTime();
 		}
 
 		if (IsKeyDown(KeyboardKey::KEY_LEFT))
 		{
-			player.posX -= player.speed * GetFrameTime();			
+			player.posX -= player.speed * GetFrameTime();
 		}
-
-		DrawTexture(playerTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 
 	void PlayerScreenLimits(Player& player)
@@ -137,9 +144,12 @@ namespace game
 		}
 	}
 
-	void EnemyMovement(Enemy& enemy)
+	void EnemyMovement(Enemy& enemy, Texture2D& enemyTexture)
 	{
 		enemy.posY += enemy.speed * GetFrameTime();
+
+		enemyTexture.width = enemy.width;
+		enemyTexture.height = enemy.height;
 	}
 
 	void EnemyScreenlimits(Enemy& enemy)
@@ -150,19 +160,48 @@ namespace game
 		}
 	}
 
-	void UpdateGame(Player& player, Texture2D& playerTexture, Ammo& ammo, Enemy& enemy)
+	void ResetGame(Player& player, Ammo& ammo, Enemy& enemy)
 	{
+		player.posX = static_cast<float>(GetScreenWidth() / 2);
+		player.posY = static_cast<float>(GetScreenHeight() - 100);
+
+		player.crashed = false;
+
+		enemy.posX = 350;
+		enemy.posY = 0;
+
+		for (int i = 0; i < MAX_AMMO; i++)
+		{
+			ammo.bullet[i].shooted = false;
+		}
+	}
+
+	void UpdateGame(Player& player, Texture2D& playerTexture,
+		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
+		Texture2D& background, float& scrollingBack)
+	{
+		DrawBackground(background, scrollingBack);
+
+		DrawTexture(playerTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
+
+		DrawTexture(enemyTexture, static_cast<int>(enemy.posX), static_cast<int>(enemy.posY), WHITE);
+
+
 		if (!player.crashed)
 		{
-			PlayerMovement(player, playerTexture);
+			scrollingBack -= 50.0f * GetFrameTime();
+
+			if (scrollingBack <= -background.height * 2) scrollingBack = 0;
+
+			PlayerMovement(player);
 
 			PlayerScreenLimits(player);
 
 			Shoot(ammo, player);
 
-			DrawBullet(ammo);
+			DrawBullet(ammo, playerBullet);
 
-			EnemyMovement(enemy);
+			EnemyMovement(enemy, enemyTexture);
 
 			EnemyScreenlimits(enemy);
 
@@ -176,6 +215,15 @@ namespace game
 		if (player.crashed)
 		{
 			DrawText("GAME OVER", GetScreenWidth() / 2 - 100, GetScreenHeight() / 2, 50, BLACK);
+
+			DrawText("Press esc to return to the menu", GetScreenWidth() / 2-50, GetScreenHeight() / 2 + 60, 25, BLACK);
+		
+			DrawText("Or press enter to play again", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 25, BLACK);
+
+			if (IsKeyPressed(KeyboardKey::KEY_ENTER))
+			{
+				ResetGame(player, ammo, enemy);
+			}
 		}
 	}
 }

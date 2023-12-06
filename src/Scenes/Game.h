@@ -9,7 +9,13 @@
 
 namespace game
 {
+	void DrawBackground(Texture2D& background, float& scrollingBack);
+
 	void Drawgame(Player player, Enemy enemy);
 
-	void UpdateGame(Player& player, Texture2D& playerTexture, Ammo& ammo, Enemy& enemy);
+	void ResetGame(Player& player, Ammo& ammo, Enemy& enemy);
+
+	void UpdateGame(Player& player, Texture2D& playerTexture,
+		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
+		Texture2D& background, float& scrollingBack);
 }

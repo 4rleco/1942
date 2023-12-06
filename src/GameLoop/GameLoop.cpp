@@ -48,7 +48,7 @@ namespace game
 
 		Enemy enemy;
 
-		float scorrlingBack;
+		float scrollingBack = 0.0f;
 
 		InitGame(player, ammo, enemy);
 		InitTextures(playerTexture, playerBullet, enemyTexture, background);
@@ -64,10 +64,14 @@ namespace game
 			switch (screen)
 			{
 			case Screen::MENU:
+				DrawBackground(background, scrollingBack);
 				DrawMenu(screen, closeGame);
+				ResetGame(player, ammo, enemy);
 				break;
 			case Screen::GAME:
-				UpdateGame(player,playerTexture, ammo, enemy);
+				UpdateGame(player,playerTexture, 
+					ammo, playerBullet, enemy, enemyTexture,
+				background, scrollingBack);
 				break;
 			case Screen::OPTIONS:
 				break;
@@ -82,7 +86,7 @@ namespace game
 			case Screen::MENU:
 				break;
 			case Screen::GAME:
-				Drawgame(player, enemy);
+				//Drawgame(player, enemy);
 				ReturnToMenu(screen);
 				break;
 			case Screen::OPTIONS:

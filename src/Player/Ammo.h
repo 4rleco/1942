@@ -2,6 +2,8 @@
 
 #include "Bullet.h"
 
+#include "raylib.h"
+
 #include "Player.h"
 
 const int MAX_AMMO = 20;
@@ -15,4 +17,4 @@ struct Ammo
 
 void InitAmmo(Ammo& ammo, Player player);
 
-void DrawBullet(Ammo ammo);
+void DrawBullet(Ammo ammo, Texture2D& playerBullet);
