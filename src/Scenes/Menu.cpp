@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-void DrawMenu(Screen& screen)
+void DrawMenu(Screen& screen, bool& closeGame)
 {
 	DrawText("Flappy Bird", GetScreenWidth() / 2 - 250, GetScreenHeight() - 600, 100, WHITE);
 	DrawText("Use the left button of the mosue to chosse an option", GetScreenWidth() - 750, GetScreenHeight() / 2 - 100, 20, WHITE);
@@ -39,7 +39,7 @@ void DrawMenu(Screen& screen)
 		
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
-			CloseWindow();
+			closeGame = true;
 		}
 	}
 

@@ -1,44 +1,50 @@
 #include "GameLoop.h"
 
 #include "raylib.h"
-#include <iostream>
 
+#include "Player/Player.h"
+#include "Player/Bullet.h"
 #include "Enemy/Enemy.h"
+
 #include "Scenes/Menu.h"
+#include "Scenes/Game.h"
+#include "Scenes/Credits.h"
 
 namespace game
 {
-	void InitGame(Enemy& enemy)
+	void InitGame(Player& player, Bullet& bullet, Enemy& enemy)
 	{
 		const int width = 1024;
 		const int height = 768;
 
 		InitWindow(width, height, "1942");
 
+		InitPlayer(player);
+		InitBullet(bullet, player);
 		InitEnemy(enemy);
-	}
-
-	void Drawgame(Enemy enemy)
-	{
-		DrawRectangle(static_cast<int>(enemy.posX), static_cast<int>(enemy.posY), enemy.width, enemy.height, RED);
 	}
 
 	void Gameloop()
 	{
 		Screen screen = Screen::MENU;
 
+		Player player;
+		Bullet bullet;
+
 		Enemy enemy;
 
-		InitGame(enemy);
+		InitGame(player, bullet, enemy);
 
-		while (!WindowShouldClose())
+		bool closeGame = false;
+
+		while (!WindowShouldClose() && !closeGame)
 		{
 			SetExitKey(NULL);
 
 			switch (screen)
 			{
 			case Screen::MENU:
-				DrawMenu(screen);
+				DrawMenu(screen, closeGame);
 				break;
 			case Screen::GAME:
 				break;
@@ -53,9 +59,10 @@ namespace game
 			case Screen::MENU:
 				break;
 			case Screen::GAME:
-				Drawgame(enemy);
+				Drawgame(player, bullet,  enemy);
 				break;
 			case Screen::CREDITS:
+				DrawCredits();
 				break;
 			}
 

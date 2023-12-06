@@ -7,6 +7,8 @@ struct Enemy
 
 	int width;
 	int height;
+
+	bool destroyed;
 };
 
 void InitEnemy(Enemy& enemy);

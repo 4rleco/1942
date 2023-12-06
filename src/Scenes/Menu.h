@@ -9,4 +9,4 @@ enum class Screen
 };
 
 // dibuja el menú
-void DrawMenu(Screen& screen);
+void DrawMenu(Screen& screen, bool& closeGame);

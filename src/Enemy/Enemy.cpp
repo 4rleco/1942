@@ -7,4 +7,6 @@ void InitEnemy(Enemy& enemy)
 
 	enemy.width = 110;
 	enemy.height = 40;
+
+	enemy.destroyed = false;
 }

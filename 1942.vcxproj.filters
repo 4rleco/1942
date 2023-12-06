@@ -19,6 +19,9 @@
     <Filter Include="enemy">
       <UniqueIdentifier>{5c193397-7bf3-493f-9663-8de8caebe009}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{17eb560e-bbaf-4019-b5b2-5a3401d0b8cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -39,6 +42,12 @@
     <ClCompile Include="src\Enemy\Enemy.cpp">
       <Filter>enemy</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player\Player.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player\Bullet.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop\GameLoop.h">
@@ -55,6 +64,12 @@
     </ClInclude>
     <ClInclude Include="src\Enemy\Enemy.h">
       <Filter>enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\Bullet.h">
+      <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

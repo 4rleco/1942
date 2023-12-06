@@ -22,6 +22,8 @@
     <ClCompile Include="src\Enemy\Enemy.cpp" />
     <ClCompile Include="src\GameLoop\GameLoop.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\Player\Bullet.cpp" />
+    <ClCompile Include="src\Player\Player.cpp" />
     <ClCompile Include="src\Scenes\Credits.cpp" />
     <ClCompile Include="src\Scenes\Game.cpp" />
     <ClCompile Include="src\Scenes\Menu.cpp" />
@@ -29,6 +31,8 @@
   <ItemGroup>
     <ClInclude Include="src\Enemy\Enemy.h" />
     <ClInclude Include="src\GameLoop\GameLoop.h" />
+    <ClInclude Include="src\Player\Bullet.h" />
+    <ClInclude Include="src\Player\Player.h" />
     <ClInclude Include="src\Scenes\Credits.h" />
     <ClInclude Include="src\Scenes\Game.h" />
     <ClInclude Include="src\Scenes\Menu.h" />
