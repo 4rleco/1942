@@ -47,6 +47,7 @@ namespace game
 				DrawMenu(screen, closeGame);
 				break;
 			case Screen::GAME:
+				UpdateGame(player, enemy);
 				break;
 			case Screen::CREDITS:
 				break;
@@ -60,9 +61,11 @@ namespace game
 				break;
 			case Screen::GAME:
 				Drawgame(player, bullet,  enemy);
+				ReturnToMenu(screen);
 				break;
 			case Screen::CREDITS:
 				DrawCredits();
+				ReturnToMenu(screen);
 				break;
 			}
 

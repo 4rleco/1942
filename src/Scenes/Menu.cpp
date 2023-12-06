@@ -45,3 +45,14 @@ void DrawMenu(Screen& screen, bool& closeGame)
 
 	DrawText("1.0", GetScreenWidth() - 60, GetScreenHeight() - 40, 40, WHITE);
 }
+
+void ReturnToMenu(Screen& screen)
+{
+	if (screen!=Screen::MENU)
+	{
+		if (IsKeyPressed(KeyboardKey::KEY_ESCAPE))
+		{
+			screen = Screen::MENU;
+		}
+	}
+}
