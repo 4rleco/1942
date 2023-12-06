@@ -13,10 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="scenes">
+      <UniqueIdentifier>{d081c248-881f-4a06-a834-ae63d278dae7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="enemy">
+      <UniqueIdentifier>{5c193397-7bf3-493f-9663-8de8caebe009}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="src\GameLoop\GameLoop.cpp">
+      <Filter>Archivos de origen</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\Menu.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\Game.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\Credits.cpp">
+      <Filter>scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy\Enemy.cpp">
+      <Filter>enemy</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\GameLoop\GameLoop.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Menu.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Game.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Credits.h">
+      <Filter>scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy\Enemy.h">
+      <Filter>enemy</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

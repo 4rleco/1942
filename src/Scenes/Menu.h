@@ -1,0 +1,12 @@
+#pragma once
+
+enum class Screen
+{
+	MENU,
+	GAME,
+	CREDITS,
+	EXIT
+};
+
+// dibuja el menú
+void DrawMenu(Screen& screen);
