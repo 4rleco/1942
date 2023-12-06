@@ -34,6 +34,29 @@ void PlayerMovement(Player& player)
 	}
 }
 
+void PlayerScreenLimits(Player& player)
+{
+	if (player.posX <= 0)
+	{
+		player.posX = 0;
+	}
+
+	if (player.posX + player.width >= GetScreenWidth())
+	{
+		player.posX = static_cast<float>(GetScreenWidth() - player.width);
+	}
+
+	if (player.posY <= 0)
+	{
+		player.posY = 0;
+	}
+
+	if (player.posY + player.height >= GetScreenHeight())
+	{
+		player.posY = static_cast<float>(GetScreenHeight() - player.height);
+	}
+}
+
 void PlayerEnemyColision(Player& player, Enemy enemy)
 {
 	if ((player.posX + player.width >= enemy.posX) &&
@@ -50,6 +73,8 @@ void UpdateGame(Player& player, Enemy& enemy)
 	if (!player.crashed)
 	{
 		PlayerMovement(player);
+
+		PlayerScreenLimits(player);
 
 		PlayerEnemyColision(player, enemy);
 	}
