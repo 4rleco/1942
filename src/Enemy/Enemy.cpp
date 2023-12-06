@@ -8,7 +8,7 @@ void InitEnemy(Enemy& enemy)
 	enemy.width = 110;
 	enemy.height = 40;
 
-	enemy.speed = 100.0f;
+	enemy.speed = 150.0f;
 
 	enemy.destroyed = false;
 }

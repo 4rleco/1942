@@ -105,9 +105,39 @@ namespace game
 		}
 	}
 
+	void BulletEnemyCollision(Ammo ammo, Enemy& enemy)
+	{
+		for (int i = 0; i < MAX_AMMO; i++)
+		{
+			if (ammo.bullet[i].shooted)
+			{
+				float bulletWidth = ammo.bullet[i].radius * 2;
+				float bulletHeight = ammo.bullet[i].radius * 2;
+
+				if ((enemy.posX + enemy.width >= ammo.bullet[i].posX) &&
+					(enemy.posX <= (ammo.bullet[i].posX - ammo.bullet[i].radius) + bulletWidth) &&
+					(enemy.posY + enemy.height >= ammo.bullet[i].posY) &&
+					(enemy.posY <= (ammo.bullet[i].posY - ammo.bullet[i].radius) + bulletHeight))
+				{
+					enemy.posY = -5;
+
+					
+				}
+			}
+		}
+	}
+
 	void EnemyMovement(Enemy& enemy)
 	{
 		enemy.posY += enemy.speed * GetFrameTime();
+	}
+
+	void EnemyScreenlimits(Enemy& enemy)
+	{
+		if (enemy.posY >= GetScreenHeight())
+		{
+			enemy.posY = -5;
+		}
 	}
 
 	void UpdateGame(Player& player, Ammo& ammo, Enemy& enemy)
@@ -123,6 +153,10 @@ namespace game
 			DrawBullet(ammo);
 
 			EnemyMovement(enemy);
+
+			EnemyScreenlimits(enemy);
+
+			BulletEnemyCollision(ammo, enemy);
 
 			PlayerEnemyColision(player, enemy);
 		}
