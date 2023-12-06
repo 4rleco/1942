@@ -22,6 +22,9 @@
     <Filter Include="Player">
       <UniqueIdentifier>{17eb560e-bbaf-4019-b5b2-5a3401d0b8cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ammo">
+      <UniqueIdentifier>{13ef55e1-591c-48cd-b2f2-9d98a2e4aeac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -46,10 +49,13 @@
       <Filter>Player</Filter>
     </ClCompile>
     <ClCompile Include="src\Player\Bullet.cpp">
-      <Filter>Player</Filter>
+      <Filter>ammo</Filter>
     </ClCompile>
     <ClCompile Include="src\Player\Ammo.cpp">
-      <Filter>Player</Filter>
+      <Filter>ammo</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scenes\Options.cpp">
+      <Filter>scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -72,10 +78,13 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="src\Player\Bullet.h">
-      <Filter>Player</Filter>
+      <Filter>ammo</Filter>
     </ClInclude>
     <ClInclude Include="src\Player\Ammo.h">
-      <Filter>Player</Filter>
+      <Filter>ammo</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scenes\Options.h">
+      <Filter>scenes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,6 +1,8 @@
 #include "Game.h"
 
-#include "raylib.h"
+#include <iostream>
+
+using namespace std;
 
 namespace game
 {
@@ -12,11 +14,11 @@ namespace game
 		DrawRectangle(static_cast<int>(enemy.posX), static_cast<int>(enemy.posY), enemy.width, enemy.height, RED);
 	}
 
-	void PlayerMovement(Player& player)
+	void PlayerMovement(Player& player, Texture2D& playerTexture)
 	{
 		if (IsKeyDown(KeyboardKey::KEY_UP))
 		{
-			player.posY -= player.speed * GetFrameTime();
+			player.posY -= player.speed * GetFrameTime();			
 		}
 
 		if (IsKeyDown(KeyboardKey::KEY_DOWN))
@@ -26,13 +28,15 @@ namespace game
 
 		if (IsKeyDown(KeyboardKey::KEY_RIGHT))
 		{
-			player.posX += player.speed * GetFrameTime();
+			player.posX += player.speed * GetFrameTime();			
 		}
 
 		if (IsKeyDown(KeyboardKey::KEY_LEFT))
 		{
-			player.posX -= player.speed * GetFrameTime();
+			player.posX -= player.speed * GetFrameTime();			
 		}
+
+		DrawTexture(playerTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
 	}
 
 	void PlayerScreenLimits(Player& player)
@@ -77,16 +81,22 @@ namespace game
 			{
 				if (IsKeyPressed(KEY_SPACE))
 				{
+
 					ammo.bullet[i].posX = player.posX + player.width / 2;
 					ammo.bullet[i].posY = player.posY;
 
 					ammo.bullet[i].shooted = true;
+
+					//cout << "can shoot " << i << endl;
 				}
+
 			}
 
 			if (ammo.bullet[i].shooted)
 			{
 				ammo.bullet[i].posY -= ammo.speed * GetFrameTime();
+
+				//cout << "Shoot " << i << endl;
 			}
 		}
 	}
@@ -121,7 +131,7 @@ namespace game
 				{
 					enemy.posY = -5;
 
-					
+					ammo.bullet[i].shooted = false;
 				}
 			}
 		}
@@ -140,11 +150,11 @@ namespace game
 		}
 	}
 
-	void UpdateGame(Player& player, Ammo& ammo, Enemy& enemy)
+	void UpdateGame(Player& player, Texture2D& playerTexture, Ammo& ammo, Enemy& enemy)
 	{
 		if (!player.crashed)
 		{
-			PlayerMovement(player);
+			PlayerMovement(player, playerTexture);
 
 			PlayerScreenLimits(player);
 
@@ -155,6 +165,8 @@ namespace game
 			EnemyMovement(enemy);
 
 			EnemyScreenlimits(enemy);
+
+			BulletScreenLimits(ammo);
 
 			BulletEnemyCollision(ammo, enemy);
 

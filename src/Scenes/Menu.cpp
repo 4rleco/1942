@@ -22,7 +22,7 @@ void DrawMenu(Screen& screen, bool& closeGame)
 		}
 	}
 
-	if (GetMousePosition().x >= GetScreenWidth() / 2 - 40 && GetMousePosition().x <= GetScreenWidth() / 2 + 40
+	if (GetMousePosition().x >= GetScreenWidth() / 2 - 40 && GetMousePosition().x <= GetScreenWidth() / 2 + 70
 		&& GetMousePosition().y >= GetScreenHeight() / 2 + 30 && GetMousePosition().y <= GetScreenHeight() / 2 + 50)
 	{
 		DrawText("Options", GetScreenWidth() / 2 - 40, GetScreenHeight() / 2 + 30, 30, DARKBROWN);

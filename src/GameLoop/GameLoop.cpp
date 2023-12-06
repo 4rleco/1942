@@ -8,6 +8,7 @@
 
 #include "Scenes/Menu.h"
 #include "Scenes/Game.h"
+#include "Scenes/Options.h"
 #include "Scenes/Credits.h"
 
 namespace game
@@ -24,16 +25,33 @@ namespace game
 		InitEnemy(enemy);
 	}
 
+	void InitTextures(Texture2D& playerTexture, Texture2D& playerBullet,
+	Texture2D& enemyTexture, Texture2D& background)
+	{
+		playerTexture = LoadTexture("res/assets/player.png");
+		playerBullet = LoadTexture("res/assets/bullet.png");
+		enemyTexture = LoadTexture("res/assets/enemy.png");
+		background = LoadTexture("res/assets/background.png");
+	}
+
 	void Gameloop()
 	{
 		Screen screen = Screen::MENU;
+
+		Texture2D playerTexture;
+		Texture2D playerBullet;
+		Texture2D enemyTexture;
+		Texture2D background;
 
 		Player player;
 		Ammo ammo;
 
 		Enemy enemy;
 
+		float scorrlingBack;
+
 		InitGame(player, ammo, enemy);
+		InitTextures(playerTexture, playerBullet, enemyTexture, background);
 
 		bool closeGame = false;
 
@@ -49,7 +67,7 @@ namespace game
 				DrawMenu(screen, closeGame);
 				break;
 			case Screen::GAME:
-				UpdateGame(player, ammo, enemy);
+				UpdateGame(player,playerTexture, ammo, enemy);
 				break;
 			case Screen::OPTIONS:
 				break;
@@ -68,6 +86,7 @@ namespace game
 				ReturnToMenu(screen);
 				break;
 			case Screen::OPTIONS:
+				DrawOptions();
 				ReturnToMenu(screen);
 				break;
 			case Screen::CREDITS:
@@ -80,6 +99,8 @@ namespace game
 
 			EndDrawing();
 		}
+
+		UnloadTexture(playerTexture);
 
 		CloseWindow();
 
