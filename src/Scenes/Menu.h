@@ -1,5 +1,7 @@
 #pragma once
 
+#include "raylib.h"
+
 enum class Screen
 {
 	MENU,
@@ -10,7 +12,7 @@ enum class Screen
 };
 
 // dibuja el menú
-void DrawMenu(Screen& screen, bool& closeGame);
+void DrawMenu(Screen& screen, Sound& keySound, bool& closeGame);
 
 void ReturnToMenu(Screen& screen);
 

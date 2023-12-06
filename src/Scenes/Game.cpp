@@ -79,7 +79,7 @@ namespace game
 		}
 	}
 
-	void Shoot(Ammo& ammo, Player player, Sound& shotSound)
+	void Shoot(Ammo& ammo, Player player)
 	{
 		for (int i = 0; i < MAX_AMMO; i++)
 		{
@@ -101,8 +101,6 @@ namespace game
 			if (ammo.bullet[i].shooted)
 			{
 				ammo.bullet[i].posY -= ammo.speed * GetFrameTime();
-
-				PlaySound(shotSound);
 
 				//cout << "Shoot " << i << endl;
 			}
@@ -179,8 +177,7 @@ namespace game
 
 	void UpdateGame(Player& player, Texture2D& playerTexture,
 		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
-		Texture2D& background, Music& gameMusic, Sound& shotSound,
-		float& scrollingBack)
+		Texture2D& background, Music& gameMusic, float& scrollingBack)
 	{
 		DrawBackground(background, scrollingBack);
 
@@ -201,7 +198,7 @@ namespace game
 
 			PlayerScreenLimits(player);
 
-			Shoot(ammo, player, shotSound);
+			Shoot(ammo, player);
 
 			DrawBullet(ammo, playerBullet);
 

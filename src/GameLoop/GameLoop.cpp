@@ -36,10 +36,10 @@ namespace game
 		background = LoadTexture("res/assets/background.png");
 	}
 
-	void InitSounds(Music& gameMusic, Sound& shotSound)
+	void InitSounds(Music& gameMusic, Sound& keySound)
 	{
 		gameMusic = LoadMusicStream("res/sounds/just-relax-11157.mp3");
-		shotSound = LoadSound("res/sounds/bengala-bengalas-luz-emergencia-disparo-4-.wav");
+		keySound = LoadSound("sound-1-167181.wav");
 	}
 
 	void Gameloop()
@@ -52,7 +52,7 @@ namespace game
 		Texture2D background;
 
 		Music gameMusic;
-		Sound shotSound;
+		Sound keySound;
 
 		Player player;
 		Ammo ammo;
@@ -63,7 +63,7 @@ namespace game
 
 		InitGame(player, ammo, enemy);
 		InitTextures(playerTexture, playerBullet, enemyTexture, background);
-		InitSounds(gameMusic, shotSound);
+		InitSounds(gameMusic, keySound);
 
 		bool closeGame = false;
 
@@ -77,13 +77,13 @@ namespace game
 			{
 			case Screen::MENU:
 				DrawBackground(background, scrollingBack);
-				DrawMenu(screen, closeGame);
+				DrawMenu(screen, keySound, closeGame);
 				ResetGame(player, ammo, enemy);
 				break;
 			case Screen::GAME:
 				UpdateGame(player,playerTexture, 
 					ammo, playerBullet, enemy, enemyTexture,
-				background, gameMusic, shotSound, scrollingBack);
+				background, gameMusic, scrollingBack);
 				break;
 			case Screen::OPTIONS:
 				break;
@@ -123,7 +123,7 @@ namespace game
 		UnloadTexture(background);
 
 		UnloadMusicStream(gameMusic);
-		UnloadSound(shotSound);
+		UnloadSound(keySound);
 
 		CloseAudioDevice();
 

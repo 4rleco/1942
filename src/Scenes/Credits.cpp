@@ -10,5 +10,5 @@ void DrawCredits()
 
 	DrawText("I took the sounds from: ", 100, 450, 25, BLACK);
 	DrawText("pixabay.com/es/music/search/genre/pequeñas emociones", 100, 480, 25, BLACK);
-	DrawText("and http://www.sonidosmp3gratis.com", 100, 510, 25, BLACK);
+	DrawText("and pixabay.com/es/sound-effects/search/sonido/", 100, 510, 25, BLACK);
 }

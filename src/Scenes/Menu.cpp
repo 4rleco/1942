@@ -1,8 +1,6 @@
 #include "Menu.h"
 
-#include "raylib.h"
-
-void DrawMenu(Screen& screen, bool& closeGame)
+void DrawMenu(Screen& screen, Sound& keySound, bool& closeGame)
 {
 	DrawText("1942", GetScreenWidth() / 2 - 50, GetScreenHeight() - 600, 100, BLACK);
 	DrawText("Use the left button of the mosue to chosse an option", GetScreenWidth() - 750, GetScreenHeight() / 2 - 100, 20, BLACK);
@@ -19,6 +17,7 @@ void DrawMenu(Screen& screen, bool& closeGame)
 		if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
 		{
 			screen = Screen::GAME;
+			PlaySound(keySound);
 		}
 	}
 

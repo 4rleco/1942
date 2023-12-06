@@ -17,6 +17,5 @@ namespace game
 
 	void UpdateGame(Player& player, Texture2D& playerTexture,
 		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
-		Texture2D& background, Music& gameMusic, Sound& shotSound,
-			float& scrollingBack);
+		Texture2D& background, Music& gameMusic, float& scrollingBack);
 }
