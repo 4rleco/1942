@@ -6,7 +6,6 @@ using namespace std;
 
 namespace game
 {
-
 	void DrawBackground(Texture2D& background, float& scrollingBack)
 	{
 		DrawTextureEx(background, Vector2{ 20, +scrollingBack }, 0.0f, 2.0f, WHITE);
@@ -80,7 +79,7 @@ namespace game
 		}
 	}
 
-	void Shoot(Ammo& ammo, Player player)
+	void Shoot(Ammo& ammo, Player player, Sound& shotSound)
 	{
 		for (int i = 0; i < MAX_AMMO; i++)
 		{
@@ -102,6 +101,8 @@ namespace game
 			if (ammo.bullet[i].shooted)
 			{
 				ammo.bullet[i].posY -= ammo.speed * GetFrameTime();
+
+				PlaySound(shotSound);
 
 				//cout << "Shoot " << i << endl;
 			}
@@ -178,7 +179,8 @@ namespace game
 
 	void UpdateGame(Player& player, Texture2D& playerTexture,
 		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
-		Texture2D& background, float& scrollingBack)
+		Texture2D& background, Music& gameMusic, Sound& shotSound,
+		float& scrollingBack)
 	{
 		DrawBackground(background, scrollingBack);
 
@@ -193,11 +195,13 @@ namespace game
 
 			if (scrollingBack <= -background.height * 2) scrollingBack = 0;
 
+			PlayMusicStream(gameMusic);
+
 			PlayerMovement(player);
 
 			PlayerScreenLimits(player);
 
-			Shoot(ammo, player);
+			Shoot(ammo, player, shotSound);
 
 			DrawBullet(ammo, playerBullet);
 
@@ -210,6 +214,8 @@ namespace game
 			BulletEnemyCollision(ammo, enemy);
 
 			PlayerEnemyColision(player, enemy);
+
+			UpdateMusicStream(gameMusic);
 		}
 
 		if (player.crashed)

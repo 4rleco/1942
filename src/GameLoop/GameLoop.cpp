@@ -20,6 +20,8 @@ namespace game
 
 		InitWindow(width, height, "1942");
 
+		InitAudioDevice();
+
 		InitPlayer(player);
 		InitAmmo(ammo, player);
 		InitEnemy(enemy);
@@ -34,6 +36,12 @@ namespace game
 		background = LoadTexture("res/assets/background.png");
 	}
 
+	void InitSounds(Music& gameMusic, Sound& shotSound)
+	{
+		gameMusic = LoadMusicStream("res/sounds/just-relax-11157.mp3");
+		shotSound = LoadSound("res/sounds/bengala-bengalas-luz-emergencia-disparo-4-.wav");
+	}
+
 	void Gameloop()
 	{
 		Screen screen = Screen::MENU;
@@ -42,6 +50,9 @@ namespace game
 		Texture2D playerBullet;
 		Texture2D enemyTexture;
 		Texture2D background;
+
+		Music gameMusic;
+		Sound shotSound;
 
 		Player player;
 		Ammo ammo;
@@ -52,6 +63,7 @@ namespace game
 
 		InitGame(player, ammo, enemy);
 		InitTextures(playerTexture, playerBullet, enemyTexture, background);
+		InitSounds(gameMusic, shotSound);
 
 		bool closeGame = false;
 
@@ -71,7 +83,7 @@ namespace game
 			case Screen::GAME:
 				UpdateGame(player,playerTexture, 
 					ammo, playerBullet, enemy, enemyTexture,
-				background, scrollingBack);
+				background, gameMusic, shotSound, scrollingBack);
 				break;
 			case Screen::OPTIONS:
 				break;
@@ -94,6 +106,7 @@ namespace game
 				ReturnToMenu(screen);
 				break;
 			case Screen::CREDITS:
+				DrawBackground(background, scrollingBack);
 				DrawCredits();
 				ReturnToMenu(screen);
 				break;
@@ -105,6 +118,14 @@ namespace game
 		}
 
 		UnloadTexture(playerTexture);
+		UnloadTexture(playerBullet);
+		UnloadTexture(enemyTexture);
+		UnloadTexture(background);
+
+		UnloadMusicStream(gameMusic);
+		UnloadSound(shotSound);
+
+		CloseAudioDevice();
 
 		CloseWindow();
 
