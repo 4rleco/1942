@@ -7,5 +7,5 @@ void InitBullet(Bullet& bullet, Player player)
 
 	bullet.radius = 10.0f;
 
-	bullet.speed = 1.0f;
+	bullet.shooted = false;
 }

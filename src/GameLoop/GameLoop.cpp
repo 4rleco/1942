@@ -3,7 +3,7 @@
 #include "raylib.h"
 
 #include "Player/Player.h"
-#include "Player/Bullet.h"
+#include "Player/Ammo.h"
 #include "Enemy/Enemy.h"
 
 #include "Scenes/Menu.h"
@@ -12,7 +12,7 @@
 
 namespace game
 {
-	void InitGame(Player& player, Bullet& bullet, Enemy& enemy)
+	void InitGame(Player& player, Ammo& ammo, Enemy& enemy)
 	{
 		const int width = 1024;
 		const int height = 768;
@@ -20,7 +20,7 @@ namespace game
 		InitWindow(width, height, "1942");
 
 		InitPlayer(player);
-		InitBullet(bullet, player);
+		InitAmmo(ammo, player);
 		InitEnemy(enemy);
 	}
 
@@ -29,11 +29,11 @@ namespace game
 		Screen screen = Screen::MENU;
 
 		Player player;
-		Bullet bullet;
+		Ammo ammo;
 
 		Enemy enemy;
 
-		InitGame(player, bullet, enemy);
+		InitGame(player, ammo, enemy);
 
 		bool closeGame = false;
 
@@ -41,13 +41,15 @@ namespace game
 		{
 			SetExitKey(NULL);
 
+			ExitGame(screen, closeGame);
+
 			switch (screen)
 			{
 			case Screen::MENU:
 				DrawMenu(screen, closeGame);
 				break;
 			case Screen::GAME:
-				UpdateGame(player, enemy);
+				UpdateGame(player, ammo, enemy);
 				break;
 			case Screen::CREDITS:
 				break;
@@ -60,7 +62,7 @@ namespace game
 			case Screen::MENU:
 				break;
 			case Screen::GAME:
-				Drawgame(player, bullet,  enemy);
+				Drawgame(player, enemy);
 				ReturnToMenu(screen);
 				break;
 			case Screen::CREDITS:

@@ -1,10 +1,13 @@
 #pragma once
 
 #include "Player/Player.h"
-#include "Player/Bullet.h"
+#include "Player/Ammo.h"
 #include "Enemy/Enemy.h"
 #include "Menu.h"
 
-void Drawgame(Player player, Bullet bullet, Enemy enemy);
+namespace game
+{
+	void Drawgame(Player player, Enemy enemy);
 
-void UpdateGame(Player& player, Enemy& enemy);
+	void UpdateGame(Player& player, Ammo& ammo, Enemy& enemy);
+}

@@ -8,6 +8,8 @@ struct Enemy
 	int width;
 	int height;
 
+	float speed;
+
 	bool destroyed;
 };
 

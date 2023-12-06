@@ -48,6 +48,9 @@
     <ClCompile Include="src\Player\Bullet.cpp">
       <Filter>Player</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player\Ammo.cpp">
+      <Filter>Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\GameLoop\GameLoop.h">
@@ -69,6 +72,9 @@
       <Filter>Player</Filter>
     </ClInclude>
     <ClInclude Include="src\Player\Bullet.h">
+      <Filter>Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player\Ammo.h">
       <Filter>Player</Filter>
     </ClInclude>
   </ItemGroup>

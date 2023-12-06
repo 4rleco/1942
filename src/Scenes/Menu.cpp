@@ -56,3 +56,11 @@ void ReturnToMenu(Screen& screen)
 		}
 	}
 }
+
+void ExitGame(Screen screen, bool& closeGame)
+{
+	if (screen == Screen::MENU && IsKeyPressed(KeyboardKey::KEY_ESCAPE))
+	{
+		closeGame = true;
+	}
+}

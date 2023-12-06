@@ -11,7 +11,7 @@ struct Bullet
 
 	float radius;
 
-	float speed;
+	bool shooted;
 };
 
 void InitBullet(Bullet& bullet, Player player);
