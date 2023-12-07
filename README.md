@@ -2,12 +2,9 @@
 
 ## Player Movement:
 arrow key up	up
-arrow key down
-	down
-arrow key right
-	right
-arrow key left
-	left
+arrow key down	down
+arrow key right	right
+arrow key left	left
 
 You shoot with the space bar
 
