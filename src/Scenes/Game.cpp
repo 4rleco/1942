@@ -137,6 +137,18 @@ namespace game
 				{
 					enemy.posY = -5;
 
+					enemy.posX = static_cast<float>(rand() % GetScreenWidth());
+
+					if (enemy.posX <= 0)
+					{
+						enemy.posX += enemy.width;
+					}
+
+					if (enemy.posX >= GetScreenWidth())
+					{
+						enemy.posX -= enemy.width;
+					}
+
 					ammo.bullet[i].shooted = false;
 				}
 			}

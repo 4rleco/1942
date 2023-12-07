@@ -1,6 +1,7 @@
 #include "GameLoop.h"
 
 #include "raylib.h"
+#include <iostream>
 
 #include "Player/Player.h"
 #include "Player/Ammo.h"
@@ -11,10 +12,14 @@
 #include "Scenes/Options.h"
 #include "Scenes/Credits.h"
 
+using namespace std;
+
 namespace game
 {
 	void InitGame(Player& player, Ammo& ammo, Enemy& enemy)
 	{
+		srand(static_cast<unsigned int>(time(NULL)));
+
 		const int width = 1024;
 		const int height = 768;
 
