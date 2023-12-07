@@ -85,13 +85,12 @@ namespace game
 		{
 			if (!ammo.bullet[i].shooted)
 			{
-				if (IsKeyPressed(KEY_SPACE))
+				if (IsKeyPressed(KeyboardKey::KEY_SPACE))
 				{
-
 					ammo.bullet[i].posX = player.posX + player.width / 2;
 					ammo.bullet[i].posY = player.posY;
 
-					ammo.bullet[i].shooted = true;
+					ammo.bullet[i].shooted = true;					
 
 					//cout << "can shoot " << i << endl;
 				}
@@ -121,7 +120,7 @@ namespace game
 		}
 	}
 
-	void BulletEnemyCollision(Ammo ammo, Enemy& enemy)
+	void BulletEnemyCollision(Ammo& ammo, Enemy& enemy)
 	{
 		for (int i = 0; i < MAX_AMMO; i++)
 		{
@@ -141,12 +140,12 @@ namespace game
 
 					if (enemy.posX <= 0)
 					{
-						enemy.posX += enemy.width;
+						enemy.posX += static_cast<float>(0 + enemy.width);
 					}
 
 					if (enemy.posX >= GetScreenWidth())
 					{
-						enemy.posX -= enemy.width;
+						enemy.posX -= static_cast<float>(GetScreenWidth() - enemy.width);
 					}
 
 					ammo.bullet[i].shooted = false;
@@ -168,6 +167,18 @@ namespace game
 		if (enemy.posY >= GetScreenHeight())
 		{
 			enemy.posY = -5;
+
+			enemy.posX = static_cast<float>(rand() % GetScreenWidth());
+
+			if (enemy.posX <= 0)
+			{
+				enemy.posX += static_cast<float>(0 + enemy.width);
+			}
+
+			if (enemy.posX >= GetScreenWidth())
+			{
+				enemy.posX -= static_cast<float>(GetScreenWidth() - enemy.width);
+			}
 		}
 	}
 
