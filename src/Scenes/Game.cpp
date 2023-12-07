@@ -79,30 +79,28 @@ namespace game
 		}
 	}
 
-	void Shoot(Ammo& ammo, Player player)
+	void Shoot(Ammo& ammo, int i, float& timer, Player player)
 	{
-		for (int i = 0; i < MAX_AMMO; i++)
+		if (!ammo.bullet[i].shooted && timer == 0.0f)
 		{
-			if (!ammo.bullet[i].shooted)
-			{
-				if (IsKeyPressed(KeyboardKey::KEY_SPACE))
-				{
-					ammo.bullet[i].posX = player.posX + player.width / 2;
-					ammo.bullet[i].posY = player.posY;
+			ammo.bullet[i].posX = player.posX + player.width / 2;
+			ammo.bullet[i].posY = player.posY;
 
-					ammo.bullet[i].shooted = true;					
+			ammo.bullet[i].shooted = true;
 
-					//cout << "can shoot " << i << endl;
-				}
+			timer += 1.0f;
 
-			}
+			//cout << "can shoot " << i << endl;
+		}
+	}
 
-			if (ammo.bullet[i].shooted)
-			{
-				ammo.bullet[i].posY -= ammo.speed * GetFrameTime();
+	void BulletMovement(Ammo& ammo, int i)
+	{
+		if (ammo.bullet[i].shooted)
+		{
+			ammo.bullet[i].posY -= ammo.speed * GetFrameTime();
 
-				//cout << "Shoot " << i << endl;
-			}
+			//cout << "Shoot " << i << endl;
 		}
 	}
 
@@ -202,6 +200,10 @@ namespace game
 		Ammo& ammo, Texture2D& playerBullet, Enemy& enemy, Texture2D& enemyTexture,
 		Texture2D& background, Music& gameMusic, float& scrollingBack)
 	{
+		float timer = 0;
+
+		bool startTimer = false;
+
 		DrawBackground(background, scrollingBack);
 
 		DrawTexture(playerTexture, static_cast<int>(player.posX), static_cast<int>(player.posY), WHITE);
@@ -221,9 +223,32 @@ namespace game
 
 			PlayerScreenLimits(player);
 
-			Shoot(ammo, player);
+			for (int i = 0; i < MAX_AMMO; i++)
+			{
+				if (timer == 0.0f)
+				{
+					if (IsKeyPressed(KeyboardKey::KEY_SPACE))
+					{
+						Shoot(ammo, i, timer, player);
+					}
+				}
 
-			DrawBullet(ammo, playerBullet);
+				DrawBullet(ammo, i, playerBullet);
+
+				BulletMovement(ammo, i);
+			}
+
+			if (startTimer)
+			{
+				timer += GetFrameTime();
+			}
+
+			if (timer >= 4.0f)
+			{
+				timer = 0.0f;
+
+				startTimer = false;
+			}
 
 			EnemyMovement(enemy, enemyTexture);
 
@@ -242,8 +267,8 @@ namespace game
 		{
 			DrawText("GAME OVER", GetScreenWidth() / 2 - 100, GetScreenHeight() / 2, 50, BLACK);
 
-			DrawText("Press esc to return to the menu", GetScreenWidth() / 2-50, GetScreenHeight() / 2 + 60, 25, BLACK);
-		
+			DrawText("Press esc to return to the menu", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 60, 25, BLACK);
+
 			DrawText("Or press enter to play again", GetScreenWidth() / 2 - 50, GetScreenHeight() / 2 + 90, 25, BLACK);
 
 			if (IsKeyPressed(KeyboardKey::KEY_ENTER))

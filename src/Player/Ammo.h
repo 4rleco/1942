@@ -17,4 +17,4 @@ struct Ammo
 
 void InitAmmo(Ammo& ammo, Player player);
 
-void DrawBullet(Ammo ammo, Texture2D& playerBullet);
+void DrawBullet(Ammo ammo, int i, Texture2D& playerBullet);
